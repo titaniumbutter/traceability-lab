@@ -13,6 +13,7 @@ app.use(express.json())
 
 app.get('/', function(req, res) {
 
+    rollbar.log("Hello world!")
     rollbar.critical('Crash while trying to load the page')
     rollbar.warning('Webpage API unavailable')
     res.sendFile(path.join(__dirname, '/public/index.html'))

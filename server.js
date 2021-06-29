@@ -22,6 +22,10 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '/public/index.html'))
 })
 
+app.get('/spacejam', function (req, res) {
+    res.sendFile(path.join(__dirname, '/public/spacejam.jpg'))
+})
+
 app.post('/api/ballPlayers', (req, res) => {
     let {name} = req.body
     name = name.trim()

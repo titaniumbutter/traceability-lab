@@ -11,7 +11,7 @@
     <h1>Hello World</h1>
     <form>
         <input type="text" placeholder="type name here..."/>
-        <button>add student</button>
+        <button>add basketball player</button>
     </form>
     <section></section>
     <script>
@@ -21,13 +21,13 @@
 
         function submitHandler(e) {
             e.preventDefault()
-            axios.post('/api/student', {name: nameInput.value})
+            axios.post('/api/ballPlayers', {name: nameInput.value})
                 .then(res => {
                     container.innerHTML = ''
                     nameInput.value = ''
 
-                    res.data.forEach((studentName) => {
-                        container.innerHTML += `<p>${studentName}</p>`
+                    res.data.forEach((playerName) => {
+                        container.innerHTML += `<p>${playerName}</p>`
                     })
                 })
                 .catch(err => {

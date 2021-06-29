@@ -12,7 +12,7 @@ var rollbar = new Rollbar({
 app.use(express.json())
 app.use('/style', express.static('./public/styles.css'))
 
-let students = []
+let ballPlayers = []
 
 app.get('/', function(req, res) {
 
@@ -22,12 +22,12 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '/public/index.html'))
 })
 
-app.post('/api/student', (req, res) => {
+app.post('/api/ballPlayers', (req, res) => {
     let {name} = req.body
     name = name.trim()
 
-    const index = students.findIndex((studentName) => { // check if student name exists already
-        return studentName === name
+    const index = ballPlayers.findIndex((playerName) => { // check if student name exists already
+        return playerName === name
     })
 
 console.log(index)
@@ -36,15 +36,15 @@ try { // using a "try catch" block will handle any generic 500 errors (not neces
     if (index === -1 && name !== '') {
         // we'll send responses to the user based upon whether or not they gave us a valid user to add
         // also we'll send information to rollbar so we can keep track of the activity that's happening
-        students.push(name)
-        rollbar.log('student added successfully', {author: 'riley', type: 'manual'})
-        res.status(200).send(students)
+        ballPlayers.push(name)
+        rollbar.log('A favorite basketball player has been added to the list!', {author: 'israel', type: 'manual'})
+        res.status(200).send(ballPlayers)
     } else if (name === '') {
         rollbar.error('no name given')
         res.status(400).send('must provide a name')
     } else {
-        rollbar.error('student already exists')
-        res.status(400).send('that student already exists')
+        rollbar.error('player already exists')
+        res.status(400).send('that player already exists')
     }
 } catch (err) {
     rollbar.error(err)

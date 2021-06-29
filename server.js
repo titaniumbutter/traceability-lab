@@ -32,10 +32,8 @@ app.post('/api/ballPlayers', (req, res) => {
 
 console.log(index)
 
-try { // using a "try catch" block will handle any generic 500 errors (not necessary, but a good addition)
+try {
     if (index === -1 && name !== '') {
-        // we'll send responses to the user based upon whether or not they gave us a valid user to add
-        // also we'll send information to rollbar so we can keep track of the activity that's happening
         ballPlayers.push(name)
         rollbar.log('A favorite basketball player has been added to the list!', {author: 'israel', type: 'manual'})
         res.status(200).send(ballPlayers)
